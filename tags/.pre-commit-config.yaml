@@ -1,0 +1,31 @@
+---
+exclude: repository-metadata.yaml
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+        args:
+          - "--markdown-linebreak-ext=md"
+        exclude: \.bumpversion\.cfg$
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.33.0
+    hooks:
+      - id: yamllint
+        entry: yamllint --strict
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.83.6
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_docs
+        args:
+          - "--args=--lockfile=false"
+          - "--args=--sort-by required"
+      - id: terraform_tflint
